@@ -1,0 +1,4 @@
+---
+# tasks file for config_services
+- name: "Load in proper OS"
+  include_tasks: "{{ansible_network_os}}.yml"

@@ -1,0 +1,52 @@
+---
+# Tasks for ios for configuring services
+
+# Attempt to be like https://github.com/ansible-network/cisco_ios/blob/devel/templates/configure_user.j2
+# Fails and has a blank src when called
+# https://gist.github.com/heathdbrown/ca131bb37780d4b7f590cf769fed3a25
+# 2019-02-07
+#- name: "Disable Services"
+#  ios_config:
+#    src: templates/configure_services.j2
+
+# Used for debugging
+- name: "Debug Vars in Loop"
+  debug: msg="{{ service.value.command }}"
+  when:
+    - service.state is defined
+  loop: "{{ device_services | dict2items }}"
+  loop_control:
+    loop_var: service
+  tags:
+    - never
+    - debug
+
+# Verify dictionary is present
+- name: "Check Var - device_services"
+  assert:
+    that: device_services is defined
+
+- name: "Disable services set with state absent"
+  ios_config:
+    lines:
+      - "no {{ service.value.command }}"
+    defaults: yes
+  when:
+     - service.value.state is defined
+     - service.value.state == "absent"
+  loop: "{{ device_services | dict2items }}"
+  loop_control:
+    loop_var: service
+  ignore_errors: yes
+
+- name: "Enable services set with state present"
+  ios_config:
+    lines:
+      - "{{ service.value.command }}"
+    defaults: yes
+  when:
+     - service.value.state is defined
+     - service.value.state == "present"
+  loop: "{{ device_services | dict2items }}"
+  loop_control:
+    loop_var: service

@@ -1,0 +1,13 @@
+{% for service in device_services %}
+
+{% if service.state is defined and service.state == 'absent' %}
+no {{service.command}}
+
+{% endif %}
+
+{% if service.state is defined and service.state == 'present' %}
+{{ service.command }}
+
+{% endif %}
+
+{% endfor %}

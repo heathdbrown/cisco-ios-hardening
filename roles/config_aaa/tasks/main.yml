@@ -1,0 +1,4 @@
+---
+# tasks file for config_aaa
+- name: Initial Bring in on Configuration Items
+  debug: var=role_path

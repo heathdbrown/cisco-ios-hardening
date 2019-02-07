@@ -1,0 +1,14 @@
+galaxy_info:
+  author: Heath Brown
+  description: IOS Hardening Recommendations for AAA
+
+  min_ansible_version: 2.7
+
+  platforms:
+  - name: ios
+    versions:
+     - all
+
+#dependencies:
+#  - src: https://github.com/ansible-network/cisco_ios.git
+#    name: ansible-network.cisco_ios

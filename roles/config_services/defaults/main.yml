@@ -1,0 +1,65 @@
+---
+# defaults file for config_services
+# Service Recommendations
+# https://www.cisco.com/c/en/us/support/docs/ip/access-lists/13608-21.html#anc6
+device_services:
+  password_encryption:
+    state: present
+    command: "service password-encryption"
+  password_recovery:
+    state: present
+    command: "service password-recovery"
+  tcp_small_servers:
+    state: absent
+    command: "service tcp-small-servers"
+  tcp_keepalives_in:
+    state: present
+    command: service tcp-keepalives-in
+  tcp_keepalives_out:
+    state: present
+    command: service tcp-keepalives-out
+  finger:
+    state: absent
+    command: "ip finger"
+  bootp_server:
+    state: absent
+    command: "ip bootp server"
+  dhcp_bootp_ignore:
+    state: present
+    command: "ip dhcp bootp ignore"
+  dhcp:
+    state: absent
+    command: "service dhcp"
+  mop:
+    state: absent
+    command: "mop enabled"
+  domain_lookup:
+    state: absent
+    command: "ip domain-lookup"
+  pad:
+    state: absent
+    command: "service pad"
+  http_server:
+    state: absent
+    command: "ip http server"
+  http_secure_server:
+    state: absent
+    command: "ip http secure-server"
+  config:
+    state: absent
+    command: "service config"
+  cdp:
+    state: absent
+    command: "cdp run"
+  lldp:
+    state: absent
+    command: "lldp run"
+  timestamps_debug:
+    state: present
+    command: "service timestamps debug datetime msec"
+  timestamps_log:
+    state: present
+    command: "service timestamps log datetime msec"
+  cisco_smart_install:
+    state: absent
+    command: "vstack"
