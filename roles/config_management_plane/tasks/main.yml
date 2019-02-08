@@ -1,0 +1,47 @@
+---
+# tasks file for config_management_plane
+
+# Exec timeout
+- name: "Set exec-timeout on console"
+  ios_config:
+    lines:
+      - "{{ exec_timeout.command}} {{ exec_timeout.minutes }} {{ exec_timeout.seconds | default(0) }}"
+    parents:
+      - line con 0
+  when:
+    - exec_timeout is defined
+    - exec_timeout.state == "present"
+    - exec_timeout.minutes is defined
+
+- name: "Remove exec-timeout on console"
+  ios_config:
+    lines:
+      - no {{ exec_timeout.command}} {{ exec_timeout.minutes }} {{ exec_timeout.seconds | default(0) }}"
+    parents:
+      - line con 0
+  when:
+    - exec_timeout is defined
+    - exec_timeout.state == "absent"
+    - exec_timeout.minutes is defined
+
+- name: "Set exec-timeout on vty"
+  ios_config:
+    lines:
+      - "{{ exec_timeout.command}} {{ exec_timeout.minutes }} {{ exec_timeout.seconds | default(0) }}"
+    parents:
+      - line vty 0 15
+  when:
+    - exec_timeout is defined
+    - exec_timeout.state == "present"
+    - exec_timeout.minutes is defined
+
+- name: "Remove exec-timeout on vty"
+  ios_config:
+    lines:
+      - no {{ exec_timeout.command}} {{ exec_timeout.minutes }} {{ exec_timeout.seconds | default(0) }}
+    parents:
+      - line vty 0 15
+  when:
+    - exec_timeout is defined
+    - exec_timeout.state == "absent"
+    - exec_timeout.duration is defined

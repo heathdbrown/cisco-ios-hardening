@@ -6,3 +6,4 @@
   roles:
     - config_aaa
     - config_services
+    - config_management_plane

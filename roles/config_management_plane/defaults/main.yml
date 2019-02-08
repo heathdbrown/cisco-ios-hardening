@@ -1,0 +1,19 @@
+---
+# defaults file for config_management_plane
+exec_timeout:
+  minutes: 5
+  seconds: 0
+  command: "exec-timeout"
+  state: present
+memory_threshold:
+  reserve_critical:
+    value: 25
+    command: "memory reserve critical"
+    state: present
+  free_low_watermark_processor:
+    threshold: 85
+    command: "memory free low-watermark processor"
+    state: present
+  free_low_watermark_io:
+    threshold: 85
+    command: "memory free low-watermark io"
