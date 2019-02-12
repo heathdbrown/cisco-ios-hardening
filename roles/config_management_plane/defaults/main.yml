@@ -7,13 +7,18 @@ exec_timeout:
   state: present
 memory_threshold:
   reserve_critical:
-    value: 25
+    #size in kilobytes
+    #do not exceed 25% of total memory
+    value: 189275
     command: "memory reserve critical"
     state: present
   free_low_watermark_processor:
-    threshold: 85
+    #size kilobytes
+    threshold: 283913
     command: "memory free low-watermark processor"
-    state: present
+    state: absent
   free_low_watermark_io:
-    threshold: 85
+    #size kilobytes
+    threshold: 283913
     command: "memory free low-watermark io"
+    state: absent
