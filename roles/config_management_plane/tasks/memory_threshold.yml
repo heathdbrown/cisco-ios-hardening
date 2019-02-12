@@ -1,0 +1,48 @@
+---
+- name: "memory threshold reserve critical - enable"
+  ios_config:
+    lines:
+      - "{{ memory_threshold.reserve_critical.command }} {{ memory_threshold.reserve_critical.value }}"
+  when:
+    - memory_threshold.reserve_critical is defined
+    - memory_threshold.reserve_critical.state == "present"
+
+- name: "memory threshold reserve critical - disable"
+  ios_config:
+    lines:
+      - no {{ memory_threshold.reserve_critical.command }} {{ memory_threshold.reserve_critical.value }}
+  when:
+    - memory_threshold.reserve_critical is defined
+    - memory_threshold.reserve_critical.state == "absent"
+
+- name: "memory free low-watermark processor - enable"
+  ios_config:
+    lines:
+      - "{{ memory_threshold.free_low_watermark_processor.command }} {{ memory_threshold.free_low_watermark_processor.threshold }}"
+  when:
+    - memory_threshold.free_low_watermark_processor is defined
+    - memory_threshold.free_low_watermark_processor.state == "present"
+
+- name: "memory threshold reserve critical - disable"
+  ios_config:
+    lines:
+      - no {{ memory_threshold.free_low_watermark_processor.command }} {{ memory_threshold.free_low_watermark_processor.threshold }}
+  when:
+    - memory_threshold.free_low_watermark_processor is defined
+    - memory_threshold.free_low_watermark_processor.state == "absent"
+
+- name: "memory free low-watermark io - enable"
+  ios_config:
+    lines:
+      - "{{ memory_threshold.free_low_watermark_io.command }} {{ memory_threshold.free_low_watermark_io.threshold }}"
+  when:
+    - memory_threshold.free_low_watermark_io is defined
+    - memory_threshold.free_low_watermark_io.state == "present"
+
+- name: "memory free low-watermark io - disable"
+  ios_config:
+    lines:
+      - no {{ memory_threshold.free_low_watermark_io.command }} {{ memory_threshold.free_low_watermark_io.threshold }}
+  when:
+    - memory_threshold.free_low_watermark_io is defined
+    - memory_threshold.free_low_watermark_io.state == "absent"
