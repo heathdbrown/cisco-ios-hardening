@@ -1,0 +1,5 @@
+---
+# tasks file for config_management_plane
+
+- include_tasks: exec_timeout.yml
+- include_tasks: memory_threshold.yml

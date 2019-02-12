@@ -4,5 +4,15 @@
   connection: network_cli
 
   roles:
+    - name: ansible-network.cisco_ios
+      function: get_facts
     - config_aaa
     - config_services
+    - config_management_plane
+
+  tasks:
+    - name: "Debug Facts"
+      template:
+        src: debug_cisco_ios_vars.j2
+        dest: "{{ inventory_hostname }}_vars"
+      delegate_to: localhost
